@@ -14,16 +14,26 @@ public class ActionCardv2 {
                 this.value = 1000 * ((int) (Math.random() * (100 - 1 + 1) * 1)); // multiply 1000 to a number (1-100)
                 break;
             case 2: // Pay Bank
-                this.description = "Pay bank";
-                // System.out.println("X");
+                description = new String[] { "Buy an Item", "Visit a place", "Hiking", "Watch a show",
+                        "Win a competition", "Traffic violation"};
+                this.description = description[(int) (Math.random() * description.length)];
+                this.value = 1000 * ((int) (Math.random() * (100 - 1 + 1) * 1)); // multiply 1000 to a number (1-100)
                 break;
             case 3: // Collect From Player
-                this.description = "collect from player";
-                // System.out.println("Y");
+                description = new String[] { "File a Lawsuit", "It's your Birthday"};
+                this.description = description[(int) (Math.random() * description.length)];
+                if(this.description.equals(description[1]))
+                    toAll = true;
+                    
+                this.value = 1000 * ((int) (Math.random() * (100 - 1 + 1) * 1)); // multiply 1000 to a number (1-100)
                 break;
             case 4: // Pay Player
-                this.description = "pay player";
-                // System.out.println("Z");
+                description = new String[] { "File a Lawsuit", "It's your Birthday"};
+                this.description = description[(int) (Math.random() * description.length)];
+                if(this.description.equals(description[1]))
+                    toAll = true;
+
+                this.value = 1000 * ((int) (Math.random() * (100 - 1 + 1) * 1)); // multiply 1000 to a number (1-100)
                 break;
         }
 

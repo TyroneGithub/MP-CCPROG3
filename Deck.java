@@ -17,13 +17,16 @@ public class Deck {
 
     public void generateDeck() {
         int type;
-        int min = 1;
-        int max = 4;
-        int range = max - min + 1;
-        for (int i = 0; i < this.MAX; i++) {
-            type = (int) (Math.random() * range) + min;
-            this.actionCard.add(new ActionCardv2(type));
-        }
+        
+        for (int i = 0; i < 20; i++) 
+            this.actionCard.add(new ActionCardv2(1));
+        for (int i = 20; i < 40; i++) 
+            this.actionCard.add(new ActionCardv2(2));
+        for (int i = 40; i < 45; i++) 
+            this.actionCard.add(new ActionCardv2(3));
+        for (int i = 45; i < 50; i++) 
+            this.actionCard.add(new ActionCardv2(4));
+        
     }
 
     public void shuffleDeck() {
