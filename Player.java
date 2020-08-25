@@ -5,22 +5,25 @@ public class Player {
     private boolean isRetired;
     public Player(String name) {
         this.name = name;
+        this.cash = 20000;
     }
 
-    public void drawCard(Deck deck) {
-        drawnCard = deck.drawCard();
-    }
-
-    public String getDrawnCard() {
-        return this.drawnCard.getDescription();
-    }
 
     public String getName(){
         return this.name;
     }
+    public double getCash(){
+        return this.cash;
+    }
 
+    public void updateCash(double cash){
+        this.cash += cash;
+    }
     public boolean getIsRetired(){
         return this.isRetired;
+    }
+    public void setToRetire(boolean isRetired){
+        this.isRetired = isRetired;
     }
 
 }
