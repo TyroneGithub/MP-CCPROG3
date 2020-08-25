@@ -17,16 +17,17 @@ public class Deck {
 
     public void generateDeck() {
         int type;
-        
-        for (int i = 0; i < 20; i++) 
+        int fortyPercent = (int) (this.MAX * 0.4);
+        int tenPercent = (int) (this.MAX * 0.1);
+        for (int i = 0; i < fortyPercent; i++)
             this.actionCard.add(new ActionCardv2(1));
-        for (int i = 20; i < 40; i++) 
+        for (int i = fortyPercent; i < fortyPercent * 2; i++)
             this.actionCard.add(new ActionCardv2(2));
-        for (int i = 40; i < 45; i++) 
+        for (int i = fortyPercent * 2; i < (fortyPercent * 2) + tenPercent; i++)
             this.actionCard.add(new ActionCardv2(3));
-        for (int i = 45; i < 50; i++) 
+        for (int i = (fortyPercent * 2) + tenPercent; i < this.MAX; i++)
             this.actionCard.add(new ActionCardv2(4));
-        
+
     }
 
     public void shuffleDeck() {
@@ -35,16 +36,25 @@ public class Deck {
 
     public String showCards() {
         String text = "";
-        for (ActionCardv2 a : actionCard) {
-            text += a.getDescription() + "\n";
+        for (int i = 0; i < this.numCards; i++) {
+            text += this.actionCard.get(i).getDescription() + "\n";
         }
         return text;
     }
 
     public ActionCardv2 drawCard() {
+        checkDeck();
         ActionCardv2 a = this.actionCard.get(this.numCards - 1);
         this.numCards--;
         return a;
+    }
+
+    private void checkDeck() {
+        if (this.numCards == 0) {
+            System.out.println("Deck is empty! Refilling and shuffling deck...");
+            this.numCards = this.MAX;
+            shuffleDeck();
+        }
     }
 
 }

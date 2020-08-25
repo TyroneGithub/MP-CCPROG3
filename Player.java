@@ -1,29 +1,96 @@
+import java.util.Scanner;
+
 public class Player {
     private String name;
     private double cash;
     private ActionCardv2 drawnCard;
     private boolean isRetired;
+
     public Player(String name) {
         this.name = name;
         this.cash = 20000;
     }
 
-
-    public String getName(){
+    public String getName() {
         return this.name;
     }
-    public double getCash(){
+
+    public double getCash() {
         return this.cash;
     }
 
-    public void updateCash(double cash){
+    public void updateCash(double cash) {
         this.cash += cash;
     }
-    public boolean getIsRetired(){
+
+    public boolean getIsRetired() {
         return this.isRetired;
     }
-    public void setToRetire(boolean isRetired){
+
+    public void setToRetire(boolean isRetired) {
         this.isRetired = isRetired;
+    }
+
+    public void drawCard(Deck deck, Player[] otherPlayers) {
+
+        int i, playerChosen = 0;
+        Scanner scanner = new Scanner(System.in);
+        this.drawnCard = deck.drawCard();
+        System.out.println("Draws: " + this.drawnCard.getDescription() + " TYPE: " + this.drawnCard.getType()
+                + " Value: $" + this.drawnCard.getValue());
+
+        // Update State/
+        switch (this.drawnCard.getType()) {
+            case 1: // +
+                updateCash(this.drawnCard.getValue());
+                break;
+
+            case 2: // -
+                updateCash(-this.drawnCard.getValue());
+                break;
+            case 3: // +
+                if (this.drawnCard.getToAll()) {
+                    for (Player p : otherPlayers) {
+                        if (!equals(p)) {
+                            p.updateCash(-this.drawnCard.getValue());
+                            updateCash(this.drawnCard.getValue());
+                        }
+                    }
+                } else {
+                    System.out.println("Choose a player");
+                    playerChosen = Integer.parseInt(scanner.nextLine());
+                    Player p = otherPlayers[playerChosen - 1];
+                    p.updateCash(-this.drawnCard.getValue());
+                    updateCash(this.drawnCard.getValue());
+
+                }
+                break;
+            case 4: // -
+                if (this.drawnCard.getToAll()) {
+                    for (Player p : otherPlayers) {
+                        if (!equals(p)) {
+                            p.updateCash(-this.drawnCard.getValue());
+                            updateCash(this.drawnCard.getValue());
+                        }
+                    }
+                } else {
+                    System.out.println("Choose a player");
+                    playerChosen = Integer.parseInt(scanner.nextLine());
+                    Player p = otherPlayers[playerChosen - 1];
+                    p.updateCash(-this.drawnCard.getValue());
+                    updateCash(this.drawnCard.getValue());
+
+                }
+                break;
+
+        }
+
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        Player anotherPlayer = (Player) obj;
+        return anotherPlayer.getName().equals(this.name) && anotherPlayer.getCash() == this.cash;
     }
 
 }
