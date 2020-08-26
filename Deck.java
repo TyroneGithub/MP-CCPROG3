@@ -35,6 +35,7 @@ public class Deck {
     }
 
     public String showCards() {
+        System.out.println("Showing Produced  and Shuffled Cards: ");
         String text = "";
         for (int i = 0; i < this.numCards; i++) {
             text += this.actionCard.get(i).getDescription() + "\n";
@@ -51,7 +52,7 @@ public class Deck {
 
     private void checkDeck() {
         if (this.numCards == 0) {
-            System.out.println("Deck is empty! Refilling and shuffling deck...");
+            System.out.println("Deck is empty! Refilling and shuffling deck...\n\n\n");
             this.numCards = this.MAX;
             shuffleDeck();
         }

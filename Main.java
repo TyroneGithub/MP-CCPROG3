@@ -30,6 +30,7 @@ public class Main {
             System.out.println("Choose an action: ");
             System.out.println("[1] - Draw");
             System.out.println("[2] - End");
+            System.out.print("Enter : ");
             action = Integer.parseInt(scanner.nextLine());
 
             while (action != 2 && action != 1) {
