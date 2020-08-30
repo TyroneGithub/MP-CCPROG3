@@ -102,8 +102,8 @@ public class Player {
 
         int i = 0, playerChosen = 0, currPlayerIndex = 0;
         this.drawnCard = deck.drawCard();
-        System.out.println("Draws: " + this.drawnCard.getDescription() + " TYPE: " + this.drawnCard.getType()
-                + " Value: $" + this.drawnCard.getValue());
+        System.out.println("Draws: " + this.drawnCard.getDescription() + "\nType: " + this.drawnCard.getTypeToString()
+                + "\nValue: $" + this.drawnCard.getValue());
         // Update State/
         switch (this.drawnCard.getType()) {
             case 1: // +

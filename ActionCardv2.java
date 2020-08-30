@@ -79,6 +79,22 @@ public class ActionCardv2 {
         return this.type;
     }
 
+    public String getTypeToString() {
+
+        switch (this.type) {
+            case 1:
+                return "Collect From Bank";
+            case 2:
+                return "Pay from Bank";
+            case 3:
+                return "Collect From Player";
+            case 4:
+                return "Pay Player";
+            default:
+                return "Unknown";
+        }
+    }
+
     /**
      * returns whether the boolean toAll of the action card
      * 
