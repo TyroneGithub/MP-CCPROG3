@@ -78,6 +78,10 @@ public class Player {
         this.isRetired = isRetired;
     }
 
+    public void chooseCareer(Deck deck) {
+        this.career = (CareerCard) deck.drawCard();
+    }
+
     /**
      * Player draws a card from the given deck.
      * 
@@ -90,7 +94,7 @@ public class Player {
 
         int i = 0, playerChosen = 0, currPlayerIndex = 0;
         Scanner scanner = new Scanner(System.in);
-        this.drawnCard = deck.drawCard();
+        this.drawnCard = (ActionCardv2) deck.drawCard();
         System.out.println("Draws: " + this.drawnCard.getDescription() + " TYPE: " + this.drawnCard.getType()
                 + " Value: $" + this.drawnCard.getValue());
         // Update State/

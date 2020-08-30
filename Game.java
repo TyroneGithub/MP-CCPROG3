@@ -24,8 +24,8 @@ public class Game {
             players[i] = new Player(scanner.nextLine());
         }
 
-        this.actionDeck = new Deck("orange", 10);
-        actionDeck.generateDeck();
+        this.actionDeck = new Deck("action", 10);
+        // actionDeck.generateDeck();
         actionDeck.shuffleDeck();
 
     }

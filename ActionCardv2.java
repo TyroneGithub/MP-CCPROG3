@@ -1,10 +1,13 @@
-public class ActionCardv2 {
+import java.lang.Math;
+
+public class ActionCardv2 extends Card {
     private String description;
     private boolean toAll;
     private double value;
     private int type;
 
     public ActionCardv2(int type) {
+        super("Action");
         String[] description;
         this.type = type;
         this.value = 100 * ((int) (Math.random() * 100)); // multiply 100 to a number (1-100)

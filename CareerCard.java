@@ -1,4 +1,4 @@
-public class CareerCard {
+public class CareerCard extends Card {
     private String careerName;
     private final int MAX_PAY_RAISE;
     private boolean degreeRequired;
@@ -15,9 +15,14 @@ public class CareerCard {
      *                       false if not.
      */
     public CareerCard(String careerName, int payRaise, boolean degreeRequired) {
+        super("Career Card");
         this.careerName = careerName;
         this.MAX_PAY_RAISE = payRaise;
         this.degreeRequired = degreeRequired;
+    }
+
+    public Card getCard() {
+        return this;
     }
 
     /**
@@ -46,6 +51,10 @@ public class CareerCard {
 
     public boolean getDegreeRequired() {
         return this.degreeRequired;
+    }
+
+    public String getDescription() {
+        return "s";
     }
 
 }
