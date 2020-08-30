@@ -7,17 +7,24 @@ public class Player {
     private boolean isRetired;
     private CareerCard career;
 
+    Scanner scanner = new Scanner(System.in);
+
     /**
-     * Initializes the player object with the given career and name. The starting
-     * cash value is 20000.
+     * Initializes the player object with the given career. The starting cash value
+     * is 20000.
      * 
-     * @param name   name of the player
      * @param career career card picked by the player
      */
-    public Player(String name, CareerCard career) {
-        this.name = name;
+    public Player(CareerCard career) {
+        do {
+            if (this.name != null)
+                System.out.print("Enter valid name: ");
+            this.name = scanner.nextLine();
+        } while (!nameValid(this.name));
+
         this.career = career;
         this.cash = 20000;
+
     }
 
     /**
@@ -27,8 +34,13 @@ public class Player {
      * @param name name of the player
      */
 
-    public Player(String name) {
-        this.name = name;
+    public Player() {
+        do {
+            if (this.name != null)
+                System.out.print("Enter valid name: ");
+            name = scanner.nextLine();
+        } while (!nameValid(this.name));
+
         this.career = new CareerCard("Racecar Driver", 5, false);
         this.cash = 20000;
     }
@@ -89,7 +101,6 @@ public class Player {
     public void drawCard(Deck deck, Player[] otherPlayers) {
 
         int i = 0, playerChosen = 0, currPlayerIndex = 0;
-        Scanner scanner = new Scanner(System.in);
         this.drawnCard = deck.drawCard();
         System.out.println("Draws: " + this.drawnCard.getDescription() + " TYPE: " + this.drawnCard.getType()
                 + " Value: $" + this.drawnCard.getValue());
@@ -164,6 +175,21 @@ public class Player {
 
         }
 
+    }
+
+    /**
+     * Checks if the user input is valid. The user input will only be valid if it
+     * contains at least one alphanumeric character and if the String doesn't
+     * contain all whitespaces.
+     * 
+     * @param name
+     * @return true if name is valid; false otherwise
+     */
+
+    private boolean nameValid(String name) {
+        boolean checkWhiteSpaceOnly = name.trim().isEmpty();
+        boolean checkAlphaNumeric = name != null && name.matches("^[a-zA-Z0-9]*$");
+        return !checkWhiteSpaceOnly && checkAlphaNumeric;
     }
 
     /**

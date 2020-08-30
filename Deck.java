@@ -8,21 +8,21 @@ import java.util.Collections;
  */
 
 public class Deck {
-    private String color;
+    private String type;
     private ArrayList<ActionCardv2> actionCard;
     private int numCards;
     private final int MAX;
 
     /**
-     * generates a Deck given the color and the max number of cards in it
+     * generates a Deck given the type and the max number of cards in it
      * 
-     * @param color color of the card object which may either be <i>magenta</i>,
-     *              <i>blue</i>, <i>green</i>, and <i>orange</i>
-     * @param max   max number of cards in a deck
+     * @param type type of the card object which may either be <i>salary</i>,
+     *             <i>career</i>, <i>action</i>, and <i>blue</i>
+     * @param max  max number of cards in a deck
      */
 
-    public Deck(String color, int max) {
-        this.color = color;
+    public Deck(String type, int max) {
+        this.type = type;
         this.MAX = max;
         this.numCards = max;
         actionCard = new ArrayList<>(this.MAX);

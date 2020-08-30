@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-
+        Scanner scanner = new Scanner(System.in);
         /** DECK TESTER */
 
         // Deck deck = new Deck("orange", 10);
@@ -14,12 +14,17 @@ public class Main {
         // d = deck.drawCard();
         // }
 
-        Game game = new Game(2);
         int turn = 0;
         int playerIndex = 0;
         int action = 0;
+        int noOfPlayers;
+
+        System.out.print("Enter number of players: ");
+        noOfPlayers = Integer.parseInt(scanner.nextLine());
+
+        Game game = new Game(noOfPlayers);
+
         System.out.println(game.getActionDeck().showCards());
-        Scanner scanner = new Scanner(System.in);
 
         while (!game.gameOver()) {
             playerIndex = turn % game.getNumPlayers();
