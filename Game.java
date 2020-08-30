@@ -17,11 +17,12 @@ public class Game {
      */
     public Game(int NUM_PLAYERS) {
         this.NUM_PLAYERS = checkPlayerNumber(NUM_PLAYERS);
+
         this.players = new Player[this.NUM_PLAYERS];
 
-        for (int i = 0; i < NUM_PLAYERS; i++) {
+        for (int i = 0; i < this.NUM_PLAYERS; i++) {
             System.out.println("Enter Player " + (i + 1) + " name: ");
-            players[i] = new Player(scanner.nextLine());
+            players[i] = new Player();
         }
 
         this.actionDeck = new Deck("orange", 10);
@@ -111,6 +112,10 @@ public class Game {
      * @return number of players indicated.
      */
     private int checkPlayerNumber(int numPlayers) {
-        return numPlayers = numPlayers > 3 || numPlayers < 2 ? 2 : numPlayers;
+        if (numPlayers > 3 || numPlayers < 2) {
+            System.out.println("Invalid player numbers. The player number was adjusted to two.");
+            numPlayers = 2;
+        }
+        return numPlayers;
     }
 }
