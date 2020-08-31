@@ -1,3 +1,4 @@
+import phase1.*;
 import java.util.*;
 
 public class Main {
@@ -56,16 +57,6 @@ public class Main {
         }
 
         System.out.println("Game has ended");
-
-        /*
-         * Deck actionDeck = new Deck("orange", 50); Player p = new Player("Tyrone");
-         * Player p2 = new Player("Gavin"); actionDeck.generateDeck();
-         * actionDeck.shuffleDeck();
-         * 
-         * System.out.println(actionDeck.showCards()); p.drawCard(actionDeck);
-         * p2.drawCard(actionDeck); System.out.println(p.getDrawnCard());
-         * System.out.println(p2.getDrawnCard());
-         */
-
+        scanner.close();
     }
 }

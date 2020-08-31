@@ -1,4 +1,5 @@
-import java.lang.Math;
+package phase1;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -9,7 +10,7 @@ import java.util.Collections;
 
 public class Deck {
     private String type;
-    private ArrayList<ActionCardv2> actionCard;
+    private ArrayList<ActionCard> actionCard;
     private int numCards;
     private final int MAX;
 
@@ -26,20 +27,28 @@ public class Deck {
         this.MAX = max;
         this.numCards = max;
         actionCard = new ArrayList<>(this.MAX);
+        generateDeck();
     }
+
+    /**
+     * generates a deck of action cards which has a composition of 40% (Collect from
+     * Bank) Cards, 40% (Pay Bank) Cards, 10% (Pay Player), and 10% (Collect from
+     * Player) of the total number (<b>max</b>) of cards specified.
+     * 
+     */
 
     public void generateDeck() {
         int type;
         int fortyPercent = (int) (this.MAX * 0.4);
         int tenPercent = (int) (this.MAX * 0.1);
         for (int i = 0; i < fortyPercent; i++)
-            this.actionCard.add(new ActionCardv2(1));
+            this.actionCard.add(new ActionCard(1));
         for (int i = fortyPercent; i < fortyPercent * 2; i++)
-            this.actionCard.add(new ActionCardv2(2));
+            this.actionCard.add(new ActionCard(2));
         for (int i = fortyPercent * 2; i < (fortyPercent * 2) + tenPercent; i++)
-            this.actionCard.add(new ActionCardv2(3));
+            this.actionCard.add(new ActionCard(3));
         for (int i = (fortyPercent * 2) + tenPercent; i < this.MAX; i++)
-            this.actionCard.add(new ActionCardv2(4));
+            this.actionCard.add(new ActionCard(4));
 
     }
 
@@ -78,9 +87,9 @@ public class Deck {
      * @return ActionCard
      */
 
-    public ActionCardv2 drawCard() {
+    public ActionCard drawCard() {
         checkDeck();
-        ActionCardv2 a = this.actionCard.get(this.numCards - 1);
+        ActionCard a = this.actionCard.get(this.numCards - 1);
         this.numCards--;
         return a;
     }

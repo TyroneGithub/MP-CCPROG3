@@ -1,3 +1,12 @@
+package phase1;
+
+/**
+ * implements a Career Card that has the name of the career, the maximum pay
+ * raise, and a boolean type which determines whether the career needs a degree
+ * or not.
+ * 
+ */
+
 public class CareerCard {
     private String careerName;
     private final int MAX_PAY_RAISE;

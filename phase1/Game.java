@@ -1,5 +1,11 @@
+package phase1;
+
 import java.util.*;
 
+/**
+ * Creates a game that initalizes all decks and adds players to the game.
+ * 
+ */
 public class Game {
     Scanner scanner = new Scanner(System.in);
     private Player[] players;
@@ -7,11 +13,9 @@ public class Game {
     private Deck actionDeck;
 
     /**
-     * Creates a game object that initalizes all decks and adds players to the game.
-     * 
-     * Number of players may be 2 to 3. For invalid values for number of players
+     * Implements a game object that has the number of players as a parameter. The
+     * number of players may be 2 to 3. For invalid values for number of players
      * provided, 2 will be used.
-     * 
      * 
      * @param NUM_PLAYERS number of players; 2 will be used if invalid
      */
@@ -26,7 +30,6 @@ public class Game {
         }
 
         this.actionDeck = new Deck("orange", 10);
-        actionDeck.generateDeck();
         actionDeck.shuffleDeck();
 
     }
@@ -54,9 +57,10 @@ public class Game {
      * 
      * 
      * @param index of player chosen
-     * @return Player class of the player chosen.
+     * @return Player class o f the player chosen.
      */
     public Player getPlayer(int index) {
+
         return this.players[index];
     }
 
@@ -94,13 +98,14 @@ public class Game {
     }
 
     /**
-     * Displays the current cash of each player.
+     * Displays the current cash of each player and career.
      * 
      */
     public void displayState() {
         System.out.println("\nCurrent State: ");
         for (int i = 0; i < NUM_PLAYERS; i++) {
-            System.out.println(this.players[i].getName() + " : $" + this.players[i].getCash());
+            System.out.println(this.players[i].getName() + " : $" + this.players[i].getCash() + " Career: "
+                    + this.players[i].getCareer());
         }
         System.out.println();
     }
@@ -108,8 +113,9 @@ public class Game {
     /**
      * Checks if the number of players are valid or not.
      * 
+     * @param numPlayers indicated the specified number of player
      * 
-     * @return number of players indicated.
+     * @return the final number of players indicated.
      */
     private int checkPlayerNumber(int numPlayers) {
         if (numPlayers > 3 || numPlayers < 2) {

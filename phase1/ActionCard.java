@@ -1,10 +1,12 @@
+package phase1;
+
 /**
  * implements an Action Card that has a description a cash value and a type. It
  * also has a boolean toAll which sets whether the cash value will be
  * distributed to all.
  */
 
-public class ActionCardv2 {
+public class ActionCard {
     private String description;
     private boolean toAll;
     private double value;
@@ -16,7 +18,7 @@ public class ActionCardv2 {
      * @param type type will either be 1 (collect from the bank), 2 (pay the bank),
      *             3 (Collect from the player), or 4 (pay player).
      */
-    public ActionCardv2(int type) {
+    public ActionCard(int type) {
         String[] description;
         this.type = type;
         this.value = 100 * ((int) (Math.random() * 100)); // multiply 100 to a number (1-100)

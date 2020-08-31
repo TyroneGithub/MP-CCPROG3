@@ -1,9 +1,18 @@
+package phase1;
+
 import java.util.Scanner;
+
+/**
+ * Implements a Player that has a name, their current cash, the latest
+ * <b>ActionCard</b> drawn from the deck, a boolean value which determines if he
+ * is retired, and a <b>CareerCard</b> which consist of the details of his
+ * career
+ */
 
 public class Player {
     private String name;
     private double cash;
-    private ActionCardv2 drawnCard;
+    private ActionCard drawnCard;
     private boolean isRetired;
     private CareerCard career;
 
@@ -28,12 +37,10 @@ public class Player {
     }
 
     /**
-     * Initializes the player object with the given name. The starting cash value is
-     * 20000. The default career given will be a racecar driver.
+     * Initializes the player object. The starting cash value is 20000. The default
+     * career given is a racecar driver.
      * 
-     * @param name name of the player
      */
-
     public Player() {
         do {
             if (this.name != null)
@@ -41,8 +48,17 @@ public class Player {
             name = scanner.nextLine();
         } while (!nameValid(this.name));
 
-        this.career = new CareerCard("Racecar Driver", 5, false);
+        this.career = new CareerCard("Racecar Driver", 5, false); // set as default career
         this.cash = 20000;
+    }
+
+    /**
+     * Returns the string representation of the career.
+     * 
+     * @return the string representation of the career.
+     */
+    public String getCareer() {
+        return this.career.getCareerName();
     }
 
     /**
@@ -66,7 +82,7 @@ public class Player {
     /**
      * Updates the cash of the player given a value.
      * 
-     * @param cash
+     * @param cash the amount of cash added or subtracted to the total cash.
      */
     public void updateCash(double cash) {
         this.cash += cash;
@@ -84,16 +100,19 @@ public class Player {
     /**
      * Sets the retirement status of the player to true or false.
      * 
-     * @param isRetired
+     * @param isRetired true if the player is retired, false if not.
      */
     public void setToRetire(boolean isRetired) {
         this.isRetired = isRetired;
     }
 
     /**
-     * Player draws a card from the given deck.
+     * Player draws a card from the action card deck and updates it changes based on
+     * the type of card. The player's total cash will be updated based on the type
+     * of card.
      * 
-     * 
+     * Type will either be 1 (collect from the bank), 2 (pay the bank), 3 (Collect
+     * from the player), or 4 (pay player).
      * 
      * @param deck         chosen deck of cards
      * @param otherPlayers array of other players
@@ -182,7 +201,7 @@ public class Player {
      * contains at least one alphanumeric character and if the String doesn't
      * contain all whitespaces.
      * 
-     * @param name
+     * @param name name entered by the player.
      * @return true if name is valid; false otherwise
      */
 
