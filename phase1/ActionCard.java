@@ -21,7 +21,7 @@ public class ActionCard {
     public ActionCard(int type) {
         String[] description;
         this.type = type;
-        this.value = 100 * ((int) (Math.random() * 100)); // multiply 100 to a number (1-100)
+        this.value = 100 * ((int) (Math.random() * 99) + 1); // multiply 100 to a number (1-100)
         switch (type) {
             case 1: // Collect From Bank
                 description = new String[] { "Tax Refund", "Sell an Item", "Bonus Payday", "Setup School",
