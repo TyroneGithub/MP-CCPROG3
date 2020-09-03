@@ -165,8 +165,8 @@ public class Player {
                 if (this.drawnCard.getToAll()) {
                     for (Player p : otherPlayers) {
                         if (!equals(p)) {
-                            p.updateCash(-this.drawnCard.getValue());
-                            updateCash(this.drawnCard.getValue());
+                            p.updateCash(this.drawnCard.getValue());
+                            updateCash(-this.drawnCard.getValue());
                         }
                     }
                 } else {
