@@ -156,8 +156,8 @@ public class Player {
                     } while (playerChosen == currPlayerIndex || playerChosen < 1 && playerChosen > i);
 
                     Player p = otherPlayers[playerChosen - 1];
-                    p.updateCash(this.drawnCard.getValue());
-                    updateCash(-this.drawnCard.getValue());
+                    p.updateCash(-this.drawnCard.getValue());
+                    updateCash(this.drawnCard.getValue());
 
                 }
                 break;
