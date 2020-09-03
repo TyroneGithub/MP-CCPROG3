@@ -29,7 +29,7 @@ public class Game {
             players[i] = new Player();
         }
 
-        this.actionDeck = new Deck("orange", 50);
+        this.actionDeck = new Deck("Action", 50);
         actionDeck.shuffleDeck();
 
     }

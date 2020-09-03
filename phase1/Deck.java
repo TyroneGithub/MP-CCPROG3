@@ -3,6 +3,7 @@ package phase1;
 import java.util.ArrayList;
 import java.util.Collections;
 
+
 /**
  * implements a Deck object that has a color, an arrayList of the action Card,
  * the current number of cards left and its maximum card per deck
@@ -10,7 +11,7 @@ import java.util.Collections;
 
 public class Deck {
     private String type;
-    private ArrayList<ActionCard> actionCard;
+    private ArrayList<Card> cards;
     private int numCards;
     private final int MAX;
 
@@ -26,9 +27,28 @@ public class Deck {
         this.type = type;
         this.MAX = max;
         this.numCards = max;
-        actionCard = new ArrayList<>(this.MAX);
-        generateDeck();
+        cards = new ArrayList<>(this.MAX);
+        generator();
     }
+
+
+    private void generator() {
+        switch (this.type) {
+            case "Action":
+                generateActionDeck();
+                break;
+            case "Salary":
+                generateSalaryDeck();
+                break;
+            case "Career":
+                generateCareerDeck();
+                break;
+            case "Blue":
+                generateBlueDeck();
+                break;
+        }
+    }
+
 
     /**
      * generates a deck of action cards which has a composition of 40% (Collect from
@@ -37,19 +57,47 @@ public class Deck {
      * 
      */
 
-    public void generateDeck() {
-        int type;
+    private void generateActionDeck() {
         int fortyPercent = (int) (this.MAX * 0.4);
         int tenPercent = (int) (this.MAX * 0.1);
         for (int i = 0; i < fortyPercent; i++)
-            this.actionCard.add(new ActionCard(1));
+            this.cards.add(new ActionCard(1));
         for (int i = fortyPercent; i < fortyPercent * 2; i++)
-            this.actionCard.add(new ActionCard(2));
+            this.cards.add(new ActionCard(2));
         for (int i = fortyPercent * 2; i < (fortyPercent * 2) + tenPercent; i++)
-            this.actionCard.add(new ActionCard(3));
+            this.cards.add(new ActionCard(3));
         for (int i = (fortyPercent * 2) + tenPercent; i < this.MAX; i++)
-            this.actionCard.add(new ActionCard(4));
+            this.cards.add(new ActionCard(4));
 
+    }
+
+    private void generateCareerDeck() {
+        this.cards.add(new CareerCard("Lawyer", 5, true));// pay raise [5, 8]
+        this.cards.add(new CareerCard("Accountant", 5, true));// pay raise [4, 7]
+        this.cards.add(new CareerCard("Computer Consultant", 5, true));// pay raise [3, 7]
+        this.cards.add(new CareerCard("Doctor", 5, true));// pay raise [5, 8]
+        this.cards.add(new CareerCard("Server", 1, false));// pay raise [1, 4]
+        this.cards.add(new CareerCard("Racecar Driver", 2, false));// pay raise [2, 8]
+        this.cards.add(new CareerCard("Athlete", 5, false));// pay raise [1, 6]
+    }
+
+    private void generateSalaryDeck(){
+        int salaryNum = 10;
+        for(int i = 0; i < salaryNum; i++){
+            double salary = (Math.random() * 9) * 10000;
+            double tax = (Math.random() * 9) * 1000;
+            this.cards.add(new SalaryCard(salary, tax));
+        }
+    }
+
+    private void generateBlueDeck(){
+        this.cards.add(new BlueCard("Lawsuit", "Lawyer"));
+        this.cards.add(new BlueCard("Salary Tax Due","Accountant"));
+        this.cards.add(new BlueCard("Computer Repair","Computer Consultant"));
+        this.cards.add(new BlueCard("Ski Accident","Doctor"));
+        this.cards.add(new BlueCard("Tip the Server","Server"));
+        this.cards.add(new BlueCard("F1 Race","Racecar Driver"));
+        this.cards.add(new BlueCard("World Cup","Athlete"));
     }
 
     /**
@@ -58,7 +106,7 @@ public class Deck {
      */
 
     public void shuffleDeck() {
-        Collections.shuffle(this.actionCard);
+        Collections.shuffle(this.cards);
     }
 
     /**
@@ -74,7 +122,12 @@ public class Deck {
         System.out.println("Showing Produced  and Shuffled Cards: ");
         String text = "";
         for (int i = 0; i < this.numCards; i++) {
-            text += this.actionCard.get(i).getDescription() + "\n";
+            if(this.cards.get(i) instanceof ActionCard){
+                text += ((ActionCard) this.cards.get(i)).getDescription() + "\n";
+            }
+            else if (this.cards.get(i) instanceof CareerCard){
+                text += ((CareerCard) this.cards.get(i)).getCareerName() + "\n";
+            }
         }
         return text;
     }
@@ -87,9 +140,9 @@ public class Deck {
      * @return ActionCard
      */
 
-    public ActionCard drawCard() {
+    public Card drawCard() {
         checkDeck();
-        ActionCard a = this.actionCard.get(this.numCards - 1);
+        Card a = this.cards.get(this.numCards - 1);
         this.numCards--;
         return a;
     }

@@ -6,8 +6,8 @@ package phase1;
  * distributed to all.
  */
 
-public class ActionCard {
-    private String description;
+public class ActionCard extends Card {
+    // private String description;
     private boolean toAll;
     private double value;
     private int type;
@@ -19,9 +19,10 @@ public class ActionCard {
      *             3 (Collect from the player), or 4 (pay player).
      */
     public ActionCard(int type) {
+        super("Action Card");
         String[] description;
         this.type = type;
-        this.value = 100 * ((int) (Math.random() * 99) + 1); // multiply 100 to a number (1-100)
+        this.value = 1000 * ((int) (Math.random() * 9) + 1); // multiply 100 to a number (1-100)
         switch (type) {
             case 1: // Collect From Bank
                 description = new String[] { "Tax Refund", "Sell an Item", "Bonus Payday", "Setup School",

@@ -118,9 +118,63 @@ public class Player {
      * @param otherPlayers array of other players
      */
     public void drawCard(Deck deck, Player[] otherPlayers) {
+        Card c = deck.drawCard();
+        if(c instanceof ActionCard){
+            this.drawnCard = (ActionCard) c;
+            actionCardEffect(otherPlayers);
+        }
+        else if(c instanceof BlueCard){
 
+        }
+        else if(c instanceof SalaryCard){
+
+        }    
+
+    }
+
+    private void blueCardEffect(BlueCard c, Player[] otherPlayers){
+        double cash;
+        if(c.careerMatches(this.career.getCareerName())){ //if same career in the card 
+            cash = 15000.00;
+            updateCash(cash);
+        }
+      /* Pwede ata to inheritance per career 
+        switch(c.getDescription()){
+            Player p = c.othersMatched(otherPlayers);
+            case "Lawsuit":
+                if(p != null){
+                    p.updateCash(500); // to be changed sa value daw ng card
+                    updateCash(-500);
+                }
+                else{
+                    updateCash(-500); // pays the bank pero change pa rin to value ng card
+                }
+                break;
+            case "Salary Tax Due":
+                if(p != null){
+                    p.updateCash(500); // to be changed sa value tax due of current player
+                    updateCash(-500);
+                }
+                else{
+                    updateCash(-500); // pays the bank pero to be changed sa value tax due of current player
+                }
+                break;
+            case "Tip the Server":
+                // cash = Math.random() 
+                if(p != null){
+                    p.updateCash(500); // to be changed sa random number x 1000
+                    updateCash(-500);
+                }
+                else{
+                    updateCash(-500); // pays the bank pero to be changed sa random number x 1000
+                }
+        }
+        */
+    }
+
+    private void actionCardEffect(Player[] otherPlayers){
         int i = 0, playerChosen = 0, currPlayerIndex = 0;
-        this.drawnCard = deck.drawCard();
+
         System.out.println("Draws: " + this.drawnCard.getDescription() + "\nType: " + this.drawnCard.getTypeToString()
                 + "\nValue: $" + this.drawnCard.getValue());
         // Update State/
@@ -193,8 +247,8 @@ public class Player {
                 break;
 
         }
-
     }
+
 
     /**
      * Checks if the user input is valid. The user input will only be valid if it
