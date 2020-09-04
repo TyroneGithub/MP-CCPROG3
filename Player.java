@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class Player {
     private String name;
     private double cash;
+    private int spaceTracker;
     private ActionCardv2 drawnCard;
     private boolean isRetired;
     private CareerCard career;
@@ -18,6 +19,7 @@ public class Player {
         this.name = name;
         this.career = career;
         this.cash = 20000;
+        this.spaceTracker = 0;
     }
 
     /**
@@ -40,6 +42,10 @@ public class Player {
      */
     public String getName() {
         return this.name;
+    }
+
+    public int getSpaceTracker() {
+        return spaceTracker;
     }
 
     /**
@@ -168,6 +174,10 @@ public class Player {
 
         }
 
+    }
+
+    public void updateSpaceTracker() {
+        this.spaceTracker++;
     }
 
     /**
