@@ -32,6 +32,7 @@ public class Main {
             Player currPlayer = game.getPlayer(playerIndex);
 
             System.out.println("It's Player " + (playerIndex + 1) + " (" + currPlayer.getName() + "'s) turn: ");
+            game.move(currPlayer);
 
             System.out.println("Choose an action: ");
             System.out.println("[1] - Draw");

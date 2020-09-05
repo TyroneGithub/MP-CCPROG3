@@ -11,6 +11,7 @@ public class Game {
     private Player[] players;
     private int NUM_PLAYERS;
     private Deck actionDeck;
+    private Space spaces[];
 
     /**
      * Implements a game object that has the number of players as a parameter. The
@@ -31,7 +32,35 @@ public class Game {
 
         this.actionDeck = new Deck("Action", 50);
         actionDeck.shuffleDeck();
+        this.spaces = new Space[100];
+        generateSpaces();
+    }
 
+    public void generateSpaces() {
+        for (int i = 0; i < 100; i++) {
+            this.spaces[i] = new Space("orange", "dating daan", this.NUM_PLAYERS);
+            if (i == 0) {
+                for (int j = 0; j < NUM_PLAYERS; j++)
+                    this.spaces[i].getPlayers().add(players[j]);
+            }
+        }
+    }
+
+    private int spinWheel() {
+        return (int) (Math.random() * (12 - 1 + 1) + 1);
+    }
+
+    public void move(Player p) {
+        int moveCnt = spinWheel();
+        System.out.println("Moving Player " + p.getName() + " to +" + moveCnt + " steps");
+        for (; moveCnt > 0; moveCnt--) {
+            this.spaces[p.getSpaceTracker()].getPlayers().remove(p); // removes from a player to the current shit
+            p.updateSpaceTracker();
+            if (!this.spaces[p.getSpaceTracker()].isJunction())
+                this.spaces[p.getSpaceTracker()].getPlayers().add(p);
+            else
+                moveCnt = 0;
+        }
     }
 
     /**
@@ -108,6 +137,14 @@ public class Game {
                     + this.players[i].getCareer());
         }
         System.out.println();
+        for (int i = 0; i < 100; i++) {
+            if (this.spaces[i].getPlayers().size() != 0) {
+                System.out.println("Space " + (i + 1) + " Players: ");
+                for (int j = 0; j < this.spaces[i].getPlayers().size(); j++)
+                    System.out.println(this.spaces[i].getPlayers().get(j).getName());
+
+            }
+        }
     }
 
     /**

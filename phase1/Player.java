@@ -15,6 +15,7 @@ public class Player {
     private ActionCard drawnCard;
     private boolean isRetired;
     private CareerCard career;
+    private int spaceTracker;
 
     Scanner scanner = new Scanner(System.in);
 
@@ -33,6 +34,7 @@ public class Player {
 
         this.career = career;
         this.cash = 20000;
+        this.spaceTracker = 0;
 
     }
 
@@ -50,6 +52,8 @@ public class Player {
 
         this.career = new CareerCard("Racecar Driver", 5, false); // set as default career
         this.cash = 20000;
+        this.spaceTracker = 0;
+
     }
 
     /**
@@ -84,8 +88,16 @@ public class Player {
      * 
      * @param cash the amount of cash added or subtracted to the total cash.
      */
+    public int getSpaceTracker() {
+        return spaceTracker;
+    }
+
     public void updateCash(double cash) {
         this.cash += cash;
+    }
+
+    public void updateSpaceTracker() {
+        this.spaceTracker++;
     }
 
     /**
@@ -119,60 +131,39 @@ public class Player {
      */
     public void drawCard(Deck deck, Player[] otherPlayers) {
         Card c = deck.drawCard();
-        if(c instanceof ActionCard){
+        if (c instanceof ActionCard) {
             this.drawnCard = (ActionCard) c;
             actionCardEffect(otherPlayers);
-        }
-        else if(c instanceof BlueCard){
+        } else if (c instanceof BlueCard) {
+
+        } else if (c instanceof SalaryCard) {
 
         }
-        else if(c instanceof SalaryCard){
-
-        }    
 
     }
 
-    private void blueCardEffect(BlueCard c, Player[] otherPlayers){
+    private void blueCardEffect(BlueCard c, Player[] otherPlayers) {
         double cash;
-        if(c.careerMatches(this.career.getCareerName())){ //if same career in the card 
+        if (c.careerMatches(this.career.getCareerName())) { // if same career in the card
             cash = 15000.00;
             updateCash(cash);
         }
-      /* Pwede ata to inheritance per career 
-        switch(c.getDescription()){
-            Player p = c.othersMatched(otherPlayers);
-            case "Lawsuit":
-                if(p != null){
-                    p.updateCash(500); // to be changed sa value daw ng card
-                    updateCash(-500);
-                }
-                else{
-                    updateCash(-500); // pays the bank pero change pa rin to value ng card
-                }
-                break;
-            case "Salary Tax Due":
-                if(p != null){
-                    p.updateCash(500); // to be changed sa value tax due of current player
-                    updateCash(-500);
-                }
-                else{
-                    updateCash(-500); // pays the bank pero to be changed sa value tax due of current player
-                }
-                break;
-            case "Tip the Server":
-                // cash = Math.random() 
-                if(p != null){
-                    p.updateCash(500); // to be changed sa random number x 1000
-                    updateCash(-500);
-                }
-                else{
-                    updateCash(-500); // pays the bank pero to be changed sa random number x 1000
-                }
-        }
-        */
+        /*
+         * Pwede ata to inheritance per career switch(c.getDescription()){ Player p =
+         * c.othersMatched(otherPlayers); case "Lawsuit": if(p != null){
+         * p.updateCash(500); // to be changed sa value daw ng card updateCash(-500); }
+         * else{ updateCash(-500); // pays the bank pero change pa rin to value ng card
+         * } break; case "Salary Tax Due": if(p != null){ p.updateCash(500); // to be
+         * changed sa value tax due of current player updateCash(-500); } else{
+         * updateCash(-500); // pays the bank pero to be changed sa value tax due of
+         * current player } break; case "Tip the Server": // cash = Math.random() if(p
+         * != null){ p.updateCash(500); // to be changed sa random number x 1000
+         * updateCash(-500); } else{ updateCash(-500); // pays the bank pero to be
+         * changed sa random number x 1000 } }
+         */
     }
 
-    private void actionCardEffect(Player[] otherPlayers){
+    private void actionCardEffect(Player[] otherPlayers) {
         int i = 0, playerChosen = 0, currPlayerIndex = 0;
 
         System.out.println("Draws: " + this.drawnCard.getDescription() + "\nType: " + this.drawnCard.getTypeToString()
@@ -248,7 +239,6 @@ public class Player {
 
         }
     }
-
 
     /**
      * Checks if the user input is valid. The user input will only be valid if it
