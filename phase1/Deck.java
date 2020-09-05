@@ -3,7 +3,6 @@ package phase1;
 import java.util.ArrayList;
 import java.util.Collections;
 
-
 /**
  * implements a Deck object that has a color, an arrayList of the action Card,
  * the current number of cards left and its maximum card per deck
@@ -31,7 +30,6 @@ public class Deck {
         generator();
     }
 
-
     private void generator() {
         switch (this.type) {
             case "Action":
@@ -48,7 +46,6 @@ public class Deck {
                 break;
         }
     }
-
 
     /**
      * generates a deck of action cards which has a composition of 40% (Collect from
@@ -81,23 +78,23 @@ public class Deck {
         this.cards.add(new CareerCard("Athlete", 5, false));// pay raise [1, 6]
     }
 
-    private void generateSalaryDeck(){
+    private void generateSalaryDeck() {
         int salaryNum = 10;
-        for(int i = 0; i < salaryNum; i++){
+        for (int i = 0; i < salaryNum; i++) {
             double salary = (Math.random() * 9) * 10000;
             double tax = (Math.random() * 9) * 1000;
             this.cards.add(new SalaryCard(salary, tax));
         }
     }
 
-    private void generateBlueDeck(){
+    private void generateBlueDeck() {
         this.cards.add(new BlueCard("Lawsuit", "Lawyer"));
-        this.cards.add(new BlueCard("Salary Tax Due","Accountant"));
-        this.cards.add(new BlueCard("Computer Repair","Computer Consultant"));
-        this.cards.add(new BlueCard("Ski Accident","Doctor"));
-        this.cards.add(new BlueCard("Tip the Server","Server"));
-        this.cards.add(new BlueCard("F1 Race","Racecar Driver"));
-        this.cards.add(new BlueCard("World Cup","Athlete"));
+        this.cards.add(new BlueCard("Salary Tax Due", "Accountant"));
+        this.cards.add(new BlueCard("Computer Repair", "Computer Consultant"));
+        this.cards.add(new BlueCard("Ski Accident", "Doctor"));
+        this.cards.add(new BlueCard("Tip the Server", "Server"));
+        this.cards.add(new BlueCard("F1 Race", "Racecar Driver"));
+        this.cards.add(new BlueCard("World Cup", "Athlete"));
     }
 
     /**
@@ -122,10 +119,9 @@ public class Deck {
         System.out.println("Showing Produced  and Shuffled Cards: ");
         String text = "";
         for (int i = 0; i < this.numCards; i++) {
-            if(this.cards.get(i) instanceof ActionCard){
+            if (this.cards.get(i) instanceof ActionCard) {
                 text += ((ActionCard) this.cards.get(i)).getDescription() + "\n";
-            }
-            else if (this.cards.get(i) instanceof CareerCard){
+            } else if (this.cards.get(i) instanceof CareerCard) {
                 text += ((CareerCard) this.cards.get(i)).getCareerName() + "\n";
             }
         }
@@ -146,6 +142,13 @@ public class Deck {
         this.numCards--;
         return a;
     }
+
+    /*
+     * public Card pickTopTwo(){ Card a = this.cards.get(this.numCards - 1);
+     * this.numCards--; Card b = this.cards.get(this.numCards - 1); this.numCards--;
+     * 
+     * return a; }
+     */
 
     /**
      * helper function that checks the deck whenever a player draws. It calls the

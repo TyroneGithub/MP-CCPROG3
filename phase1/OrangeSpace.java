@@ -3,8 +3,8 @@ package phase1;
 public class OrangeSpace extends Space {
     private String deckType;
 
-    public OrangeSpace(String color, String path, int noOfPlayers) {
-        super(color, path, noOfPlayers);
+    public OrangeSpace(String path, int noOfPlayers) {
+        super(path, noOfPlayers);
         this.deckType = "Action";
     }
 

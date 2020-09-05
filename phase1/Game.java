@@ -37,13 +37,47 @@ public class Game {
     }
 
     public void generateSpaces() {
-        for (int i = 0; i < 100; i++) {
-            this.spaces[i] = new Space("orange", "dating daan", this.NUM_PLAYERS);
-            if (i == 0) {
-                for (int j = 0; j < NUM_PLAYERS; j++)
-                    this.spaces[i].getPlayers().add(players[j]);
-            }
+        this.spaces[0] = new Space("", this.NUM_PLAYERS);
+        for (int j = 0; j < NUM_PLAYERS; j++)
+            this.spaces[0].getPlayers().add(players[j]);
+
+        // Career Path
+        this.spaces[1] = new OrangeSpace("career", this.NUM_PLAYERS);
+        this.spaces[2] = new OrangeSpace("career", this.NUM_PLAYERS);
+        this.spaces[3] = new OrangeSpace("career", this.NUM_PLAYERS);
+        this.spaces[4] = new OrangeSpace("career", this.NUM_PLAYERS);
+        this.spaces[5] = new OrangeSpace("career", this.NUM_PLAYERS);
+        this.spaces[6] = new MagentaSpace("career", this.NUM_PLAYERS, "Get Married");
+        this.spaces[7] = new OrangeSpace("career", this.NUM_PLAYERS);
+        this.spaces[8] = new OrangeSpace("career", this.NUM_PLAYERS);
+        this.spaces[9] = new OrangeSpace("career", this.NUM_PLAYERS);
+        this.spaces[10] = new OrangeSpace("career", this.NUM_PLAYERS);
+        this.spaces[11] = new OrangeSpace("career", this.NUM_PLAYERS);
+
+        // College Path
+
+        this.spaces[12] = new OrangeSpace("college", this.NUM_PLAYERS);
+        this.spaces[13] = new OrangeSpace("college", this.NUM_PLAYERS);
+        this.spaces[14] = new OrangeSpace("college", this.NUM_PLAYERS);
+        this.spaces[15] = new OrangeSpace("college", this.NUM_PLAYERS);
+        this.spaces[16] = new OrangeSpace("college", this.NUM_PLAYERS);
+        this.spaces[17] = new OrangeSpace("college", this.NUM_PLAYERS);
+        this.spaces[18] = new MagentaSpace("college", this.NUM_PLAYERS, "Graduation");
+        this.spaces[19] = new OrangeSpace("college", this.NUM_PLAYERS);
+        this.spaces[20] = new MagentaSpace("college", this.NUM_PLAYERS, "College Career Choice");
+        this.spaces[21] = new OrangeSpace("college", this.NUM_PLAYERS);
+
+        // Meet at Some Point
+
+        for (int i = 22; i < 38; i++) {
+            this.spaces[i] = new OrangeSpace("main", this.NUM_PLAYERS);
         }
+
+        // Junction
+        this.spaces[38] = new MagentaSpace("main", this.NUM_PLAYERS, "Which path?");
+
+        // Change Career Path
+
     }
 
     private int spinWheel() {

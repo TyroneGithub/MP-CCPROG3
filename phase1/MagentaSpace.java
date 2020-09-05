@@ -4,9 +4,9 @@ public class MagentaSpace extends Space {
     private String deckType;
     private String type;
 
-    public MagentaSpace(String color, String path, int noOfPlayers, String type) {
-        super(color, path, noOfPlayers);
-        this.type = type
+    public MagentaSpace(String path, int noOfPlayers, String type) {
+        super(path, noOfPlayers);
+        this.type = type;
     }
 
     public String getDeckType() {
@@ -18,6 +18,8 @@ public class MagentaSpace extends Space {
     }
 
     public void collegeCareerChoice(Deck careerDeck, Deck salaryDeck) {
+        this.getPlayers().get(this.getPlayers().size() - 1).drawCard(careerDeck);
+        this.getPlayers().get(this.getPlayers().size() - 1).drawCard(salaryDeck);
 
     }
 

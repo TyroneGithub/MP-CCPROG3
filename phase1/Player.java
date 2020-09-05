@@ -12,6 +12,7 @@ import java.util.Scanner;
 public class Player {
     private String name;
     private double cash;
+    private SalaryCard salary;
     private ActionCard drawnCard;
     private boolean isRetired;
     private CareerCard career;
@@ -140,6 +141,16 @@ public class Player {
 
         }
 
+    }
+
+    // Career Deck & Salary Deck
+    public void drawCard(Deck deck) {
+        Card c = deck.drawCard();
+
+        if (c instanceof SalaryCard)
+            this.salary = (SalaryCard) c;
+        else
+            this.career = (CareerCard) c;
     }
 
     private void blueCardEffect(BlueCard c, Player[] otherPlayers) {

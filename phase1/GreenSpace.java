@@ -3,8 +3,8 @@ package phase1;
 public class GreenSpace extends Space {
     private String type;
 
-    public GreenSpace(String color, String path, int noOfPlayers, String type) {
-        super(color, path, noOfPlayers);
+    public GreenSpace(String path, int noOfPlayers, String type) {
+        super(path, noOfPlayers);
         this.type = type;
     }
 
