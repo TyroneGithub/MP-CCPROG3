@@ -45,7 +45,8 @@ public class Main {
             }
 
             if (action == 1) {
-                currPlayer.drawCard(game.getActionDeck(), game.getPlayers());
+                currPlayer.drawCard(game.getActionDeck(), game.getPlayers(),
+                        game.getSpace(currPlayer.getSpaceTracker()));
 
                 // display state
                 game.displayState();

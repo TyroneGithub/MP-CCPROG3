@@ -130,17 +130,40 @@ public class Player {
      * @param deck         chosen deck of cards
      * @param otherPlayers array of other players
      */
-    public void drawCard(Deck deck, Player[] otherPlayers) {
-        Card c = deck.drawCard();
-        if (c instanceof ActionCard) {
-            this.drawnCard = (ActionCard) c;
-            actionCardEffect(otherPlayers);
-        } else if (c instanceof BlueCard) {
+    public void drawCard(Deck deck, Player[] otherPlayers, Space space) {
 
-        } else if (c instanceof SalaryCard) {
+        // Card d;
+        if (space instanceof OrangeSpace) {
+            // Action Card Action
+            // d = DrawFromActionDeck();
+            // this.drawnCard = (ActionCard) d;
+            // actionCardEffect(otherPlayers);
 
+        } else if (space instanceof MagentaSpace) {
+            // Magenta Space Action
+            // magentaAction();
+
+        } else if (space instanceof BlueSpace) {
+            // Blue Action
+
+            // blueAction(); similar to Orange
+            // this.salary = d;
+            // this.career = a;
+
+        } else {
+            // Green - Pay Day or Pay Raise Action
+            // greenAction();
         }
 
+        /*
+         * Card c = deck.drawCard(); if (c instanceof ActionCard) { this.drawnCard =
+         * (ActionCard) c; actionCardEffect(otherPlayers); } else if (c instanceof
+         * BlueCard) {
+         * 
+         * } else if (c instanceof SalaryCard) {
+         * 
+         * }
+         */
     }
 
     // Career Deck & Salary Deck

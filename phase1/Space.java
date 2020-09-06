@@ -19,4 +19,15 @@ public class Space {
         return players;
     }
 
+    public String identifySpace() {
+        if (this instanceof OrangeSpace)
+            return "Orange";
+        else if (this instanceof MagentaSpace)
+            return "Magenta";
+        else if (this instanceof BlueSpace)
+            return "Blue";
+        else
+            return "Green";
+    }
+
 }

@@ -37,7 +37,7 @@ public class Game {
     }
 
     public void generateSpaces() {
-        this.spaces[0] = new Space("", this.NUM_PLAYERS);
+        this.spaces[0] = new OrangeSpace("main", this.NUM_PLAYERS);
         for (int j = 0; j < NUM_PLAYERS; j++)
             this.spaces[0].getPlayers().add(players[j]);
 
@@ -70,18 +70,71 @@ public class Game {
         // Meet at Some Point
 
         for (int i = 22; i < 38; i++) {
-            this.spaces[i] = new OrangeSpace("main", this.NUM_PLAYERS);
+            this.spaces[i] = new OrangeSpace("main", this.NUM_PLAYERS); // implement a randomizer
         }
 
         // Junction
         this.spaces[38] = new MagentaSpace("main", this.NUM_PLAYERS, "Which path?");
 
         // Change Career Path
+        this.spaces[39] = new GreenSpace("change career", this.NUM_PLAYERS, "Pay Day");
+        this.spaces[40] = new MagentaSpace("change career", this.NUM_PLAYERS, "Career Choice");
+        this.spaces[41] = new OrangeSpace("change career", this.NUM_PLAYERS);
+        this.spaces[42] = new MagentaSpace("change career", this.NUM_PLAYERS, "");
+        this.spaces[43] = new GreenSpace("change career", this.NUM_PLAYERS, "Pay Raise");
+        this.spaces[44] = new OrangeSpace("change career", this.NUM_PLAYERS);
+        this.spaces[45] = new BlueSpace("change career", this.NUM_PLAYERS);
+        this.spaces[46] = new OrangeSpace("change career", this.NUM_PLAYERS);
+        this.spaces[47] = new OrangeSpace("change career", this.NUM_PLAYERS);
+
+        // Main Path
+        this.spaces[48] = new OrangeSpace("main", this.NUM_PLAYERS);
+        this.spaces[49] = new OrangeSpace("main", this.NUM_PLAYERS);
+        this.spaces[50] = new OrangeSpace("main", this.NUM_PLAYERS);
+        this.spaces[51] = new OrangeSpace("main", this.NUM_PLAYERS);
+        this.spaces[52] = new OrangeSpace("main", this.NUM_PLAYERS);
+        this.spaces[53] = new OrangeSpace("main", this.NUM_PLAYERS);
+
+        // Meet at some point
+
+        for (int i = 54; i < 70; i++) {
+            this.spaces[i] = new OrangeSpace("main", this.NUM_PLAYERS); // implement a randomizer
+        }
+
+        this.spaces[70] = new MagentaSpace("main", this.NUM_PLAYERS, "Which path?");
+
+        // Start a Family Path
+        this.spaces[71] = new BlueSpace("family", this.NUM_PLAYERS);
+        this.spaces[72] = new OrangeSpace("family", this.NUM_PLAYERS);
+        this.spaces[73] = new GreenSpace("family", this.NUM_PLAYERS, "Pay Day");
+        this.spaces[74] = new MagentaSpace("family", this.NUM_PLAYERS, "Get Married");
+        this.spaces[75] = new BlueSpace("family", this.NUM_PLAYERS);
+        this.spaces[76] = new MagentaSpace("family", this.NUM_PLAYERS, "Buy A House");
+        this.spaces[77] = new GreenSpace("family", this.NUM_PLAYERS, "Have Baby or Twins");
+        this.spaces[78] = new OrangeSpace("family", this.NUM_PLAYERS);
+        this.spaces[79] = new OrangeSpace("family", this.NUM_PLAYERS);
+        this.spaces[80] = new MagentaSpace("family", this.NUM_PLAYERS, " ");
+
+        // Main Path
+        this.spaces[81] = new OrangeSpace("main", this.NUM_PLAYERS);
+        this.spaces[82] = new OrangeSpace("main", this.NUM_PLAYERS);
+        this.spaces[83] = new OrangeSpace("main", this.NUM_PLAYERS);
+        this.spaces[84] = new OrangeSpace("main", this.NUM_PLAYERS);
+        this.spaces[85] = new OrangeSpace("main", this.NUM_PLAYERS);
+        this.spaces[86] = new OrangeSpace("main", this.NUM_PLAYERS);
+        this.spaces[87] = new OrangeSpace("main", this.NUM_PLAYERS);
+        this.spaces[88] = new OrangeSpace("main", this.NUM_PLAYERS);
+        this.spaces[89] = new OrangeSpace("main", this.NUM_PLAYERS);
+
+        // Meet at some point
+        for (int i = 90; i < 100; i++) {
+            this.spaces[i] = new OrangeSpace("main", this.NUM_PLAYERS); // implement a randomizer
+        }
 
     }
 
     private int spinWheel() {
-        return (int) (Math.random() * (12 - 1 + 1) + 1);
+        return (int) (Math.random() * (9 - 1 + 1) + 1);
     }
 
     public void move(Player p) {
@@ -90,10 +143,10 @@ public class Game {
         for (; moveCnt > 0; moveCnt--) {
             this.spaces[p.getSpaceTracker()].getPlayers().remove(p); // removes from a player to the current shit
             p.updateSpaceTracker();
-            if (!this.spaces[p.getSpaceTracker()].isJunction())
-                this.spaces[p.getSpaceTracker()].getPlayers().add(p);
-            else
+            if (!(this.spaces[p.getSpaceTracker()] instanceof MagentaSpace))
                 moveCnt = 0;
+            this.spaces[p.getSpaceTracker()].getPlayers().add(p);
+
         }
     }
 
@@ -136,6 +189,11 @@ public class Game {
         return this.players;
     }
 
+    public Space getSpace(int index) {
+
+        return this.spaces[index];
+    }
+
     /**
      * Checks if the game is over when all the players are retired.
      * 
@@ -173,7 +231,7 @@ public class Game {
         System.out.println();
         for (int i = 0; i < 100; i++) {
             if (this.spaces[i].getPlayers().size() != 0) {
-                System.out.println("Space " + (i + 1) + " Players: ");
+                System.out.println(this.spaces[i].identifySpace() + " Space " + (i + 1) + " Players: ");
                 for (int j = 0; j < this.spaces[i].getPlayers().size(); j++)
                     System.out.println(this.spaces[i].getPlayers().get(j).getName());
 
