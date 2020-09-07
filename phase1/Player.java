@@ -169,11 +169,12 @@ public class Player {
     // Career Deck & Salary Deck
     public void drawCard(Deck deck) {
         Card c = deck.drawCard();
-
-        if (c instanceof SalaryCard)
-            this.salary = (SalaryCard) c;
-        else
-            this.career = (CareerCard) c;
+        this.drawnCard = (ActionCard) c;
+        this.drawnCard.activate();
+        // if (c instanceof SalaryCard)
+        // this.salary = (SalaryCard) c;
+        // else
+        // this.career = (CareerCard) c;
     }
 
     private void blueCardEffect(BlueCard c, Player[] otherPlayers) {
@@ -299,6 +300,11 @@ public class Player {
     public boolean equals(Object obj) {
         Player anotherPlayer = (Player) obj;
         return anotherPlayer.getName().equals(this.name) && anotherPlayer.getCash() == this.cash;
+    }
+
+    @Override
+    public String toString() {
+        return this.name + "$: " + this.cash;
     }
 
 }

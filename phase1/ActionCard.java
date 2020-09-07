@@ -7,7 +7,7 @@ package phase1;
  */
 
 public class ActionCard extends Card {
-    // private String description;
+    private String description;
     private boolean toAll;
     private double value;
     private int type;
@@ -18,38 +18,11 @@ public class ActionCard extends Card {
      * @param type type will either be 1 (collect from the bank), 2 (pay the bank),
      *             3 (Collect from the player), or 4 (pay player).
      */
-    public ActionCard(int type) {
+    public ActionCard(String description, boolean toAll) {
         super("Action Card");
-        String[] description;
-        this.type = type;
+        this.description = description;
+        this.toAll = toAll;
         this.value = 1000 * ((int) (Math.random() * 9) + 1); // multiply 100 to a number (1-100)
-        switch (type) {
-            case 1: // Collect From Bank
-                description = new String[] { "Tax Refund", "Sell an Item", "Bonus Payday", "Setup School",
-                        "Write a Book" };
-                this.description = description[(int) (Math.random() * description.length)];
-
-                break;
-            case 2: // Pay Bank
-                description = new String[] { "Buy an Item", "Visit a place", "Hiking", "Watch a show",
-                        "Win a competition", "Traffic violation" };
-                this.description = description[(int) (Math.random() * description.length)];
-                break;
-            case 3: // Collect From Player
-                description = new String[] { "File a Lawsuit", "It's your Birthday" };
-                this.description = description[(int) (Math.random() * description.length)];
-                if (this.description.equals(description[1]))
-                    toAll = true;
-
-                break;
-            case 4: // Pay Player
-                description = new String[] { "Lawsuit", "Christmas Bonus" };
-                this.description = description[(int) (Math.random() * description.length)];
-                if (this.description.equals(description[1]))
-                    toAll = true;
-
-                break;
-        }
 
     }
 
@@ -96,6 +69,10 @@ public class ActionCard extends Card {
             default:
                 return "Unknown";
         }
+    }
+
+    public void activate() {
+        System.out.println();
     }
 
     /**

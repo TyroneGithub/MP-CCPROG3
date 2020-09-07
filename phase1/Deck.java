@@ -28,6 +28,7 @@ public class Deck {
         this.numCards = max;
         cards = new ArrayList<>(this.MAX);
         generator();
+        shuffleDeck();
     }
 
     private void generator() {
@@ -55,16 +56,42 @@ public class Deck {
      */
 
     private void generateActionDeck() {
+        String[] description;
         int fortyPercent = (int) (this.MAX * 0.4);
         int tenPercent = (int) (this.MAX * 0.1);
+
+        Card[] collectFromBank = new Card[] { new CollectFromBank("Tax Refund", false),
+                new CollectFromBank("Sell an Item", false), new CollectFromBank("Bonus Payday", false),
+                new CollectFromBank("Setup School", false), new CollectFromBank("Write a Book", false),
+
+        };
+
+        Card[] payBank = new Card[] { new PayBank("Buy an Item", false), new PayBank("Visit a place", false),
+                new PayBank("Hiking", false), new PayBank("Watch a show", false),
+                new PayBank("Win a competition", false), new PayBank("Traffic violation", false)
+
+        };
+
+        Card[] collectFromPlayer = new Card[] { new CollectFromPlayer("File a Lawsuit", false),
+                new CollectFromPlayer("It's your Birthday", true)
+
+        };
+
+        Card[] payPlayer = new Card[] { new PayPlayer("Lawsuit", false), new PayPlayer("Christmas Bonus", true),
+
+        };
+
+        // for (int i = 0; i < this.MAX; i++)
+        // this.cards.add(payBank[(int) (Math.random() * payBank.length)]);
+
         for (int i = 0; i < fortyPercent; i++)
-            this.cards.add(new ActionCard(1));
+            this.cards.add(collectFromBank[(int) (Math.random() * collectFromBank.length)]);
         for (int i = fortyPercent; i < fortyPercent * 2; i++)
-            this.cards.add(new ActionCard(2));
+            this.cards.add(payBank[(int) (Math.random() * payBank.length)]);
         for (int i = fortyPercent * 2; i < (fortyPercent * 2) + tenPercent; i++)
-            this.cards.add(new ActionCard(3));
+            this.cards.add(collectFromPlayer[(int) (Math.random() * collectFromPlayer.length)]);
         for (int i = (fortyPercent * 2) + tenPercent; i < this.MAX; i++)
-            this.cards.add(new ActionCard(4));
+            this.cards.add(payPlayer[(int) (Math.random() * payPlayer.length)]);
 
     }
 
