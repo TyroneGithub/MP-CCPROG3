@@ -87,12 +87,12 @@ public class Deck {
 
         for (int i = 0; i < fortyPercent; i++)
             this.cards.add(collectFromBank[(int) (Math.random() * collectFromBank.length)]);
-        for (int i = fortyPercent; i < fortyPercent * 2; i++)
-            this.cards.add(payBank[(int) (Math.random() * payBank.length)]);
+        // for (int i = fortyPercent; i < fortyPercent * 2; i++)
+        // this.cards.add(payBank[(int) (Math.random() * payBank.length)]);
         for (int i = fortyPercent * 2; i < (fortyPercent * 2) + tenPercent; i++)
             this.cards.add(collectFromPlayer[(int) (Math.random() * collectFromPlayer.length)]);
-        for (int i = (fortyPercent * 2) + tenPercent; i < this.MAX; i++)
-            this.cards.add(payPlayer[(int) (Math.random() * payPlayer.length)]);
+        // for (int i = (fortyPercent * 2) + tenPercent; i < this.MAX; i++)
+        // this.cards.add(payPlayer[(int) (Math.random() * payPlayer.length)]);
 
     }
 

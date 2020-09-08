@@ -94,6 +94,10 @@ public class Player {
         return spaceTracker;
     }
 
+    public Card getDrawnCard() {
+        return drawnCard;
+    }
+
     public void updateCash(double cash) {
         this.cash += cash;
     }
@@ -161,7 +165,7 @@ public class Player {
     public void drawCard(Deck deck) {
         Card c = deck.drawCard();
         this.drawnCard = (ActionCard) c;
-        this.drawnCard.activate();
+        // this.drawnCard.activate();
         // if (c instanceof SalaryCard)
         // this.salary = (SalaryCard) c;
         // else
