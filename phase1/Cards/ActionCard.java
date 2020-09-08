@@ -6,11 +6,10 @@ package phase1.Cards;
  * distributed to all.
  */
 
-public class ActionCard extends Card {
+public abstract class ActionCard extends Card {
     private String description;
     private boolean toAll;
     private double value;
-    private int type;
 
     /**
      * Creates an action card object with the specified type
@@ -51,28 +50,8 @@ public class ActionCard extends Card {
      * @return type
      */
 
-    public int getType() {
-        return this.type;
-    }
-
-    public String getTypeToString() {
-
-        switch (this.type) {
-            case 1:
-                return "Collect From Bank";
-            case 2:
-                return "Pay from Bank";
-            case 3:
-                return "Collect From Player";
-            case 4:
-                return "Pay Player";
-            default:
-                return "Unknown";
-        }
-    }
-
     public void activate() {
-        System.out.println();
+        System.out.println("Card activated");
     }
 
     /**

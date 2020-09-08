@@ -58,4 +58,7 @@ public class CareerCard extends Card {
         return this.degreeRequired;
     }
 
+    public void activate() {
+        System.out.println();
+    }
 }

@@ -87,16 +87,17 @@ public class Deck {
 
         for (int i = 0; i < fortyPercent; i++)
             this.cards.add(collectFromBank[(int) (Math.random() * collectFromBank.length)]);
-        // for (int i = fortyPercent; i < fortyPercent * 2; i++)
-        // this.cards.add(payBank[(int) (Math.random() * payBank.length)]);
+        for (int i = fortyPercent; i < fortyPercent * 2; i++)
+            this.cards.add(payBank[(int) (Math.random() * payBank.length)]);
         for (int i = fortyPercent * 2; i < (fortyPercent * 2) + tenPercent; i++)
             this.cards.add(collectFromPlayer[(int) (Math.random() * collectFromPlayer.length)]);
-        // for (int i = (fortyPercent * 2) + tenPercent; i < this.MAX; i++)
-        // this.cards.add(payPlayer[(int) (Math.random() * payPlayer.length)]);
+        for (int i = (fortyPercent * 2) + tenPercent; i < this.MAX; i++)
+            this.cards.add(payPlayer[(int) (Math.random() * payPlayer.length)]);
 
     }
 
     private void generateCareerDeck() {
+        
         this.cards.add(new CareerCard("Lawyer", 5, true));// pay raise [5, 8]
         this.cards.add(new CareerCard("Accountant", 5, true));// pay raise [4, 7]
         this.cards.add(new CareerCard("Computer Consultant", 5, true));// pay raise [3, 7]
@@ -111,18 +112,19 @@ public class Deck {
         for (int i = 0; i < salaryNum; i++) {
             double salary = (Math.random() * 9) * 10000;
             double tax = (Math.random() * 9) * 1000;
-            this.cards.add(new SalaryCard(salary, tax));
+            double raiseValue = (Math.random() * 9) * 1000;
+            this.cards.add(new SalaryCard(salary, tax, raiseValue));
         }
     }
 
     private void generateBlueDeck() {
-        this.cards.add(new BlueCard("Lawsuit", "Lawyer"));
-        this.cards.add(new BlueCard("Salary Tax Due", "Accountant"));
-        this.cards.add(new BlueCard("Computer Repair", "Computer Consultant"));
-        this.cards.add(new BlueCard("Ski Accident", "Doctor"));
-        this.cards.add(new BlueCard("Tip the Server", "Server"));
-        this.cards.add(new BlueCard("F1 Race", "Racecar Driver"));
-        this.cards.add(new BlueCard("World Cup", "Athlete"));
+        this.cards.add(new Lawsuit("Lawsuit", "Lawyer", 10000.00 * ((Math.random() * (15 - 5 + 1)) + 5)));
+        this.cards.add(new SalaryTaxDue("Salary Tax Due", "Accountant"));
+        this.cards.add(new ComputerRepair("Computer Repair", "Computer Consultant"));
+        this.cards.add(new SkiAccident("Ski Accident", "Doctor"));
+        this.cards.add(new TipTheServer("Tip the Server", "Server"));
+        this.cards.add(new F1Race("F1 Race", "Racecar Driver"));
+        this.cards.add(new WorldCup("World Cup", "Athlete"));
     }
 
     /**

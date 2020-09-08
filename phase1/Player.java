@@ -17,6 +17,7 @@ public class Player {
     private ActionCard drawnCard;
     private boolean isRetired;
     private CareerCard career;
+    private SalaryCard salaryCard;
     private int spaceTracker;
 
     Scanner scanner = new Scanner(System.in);
@@ -65,6 +66,10 @@ public class Player {
      */
     public String getCareer() {
         return this.career.getCareerName();
+    }
+
+    public SalaryCard getSalaryCard() {
+        return this.salaryCard;
     }
 
     /**
@@ -191,83 +196,6 @@ public class Player {
          * updateCash(-500); } else{ updateCash(-500); // pays the bank pero to be
          * changed sa random number x 1000 } }
          */
-    }
-
-    private void actionCardEffect(Player[] otherPlayers) {
-        int i = 0, playerChosen = 0, currPlayerIndex = 0;
-
-        System.out.println("Draws: " + this.drawnCard.getDescription() + "\nType: " + this.drawnCard.getTypeToString()
-                + "\nValue: $" + this.drawnCard.getValue());
-        // Update State/
-        switch (this.drawnCard.getType()) {
-            case 1: // +
-                updateCash(this.drawnCard.getValue());
-                break;
-
-            case 2: // -
-                updateCash(-this.drawnCard.getValue());
-                break;
-            case 3: // +
-                if (this.drawnCard.getToAll()) {
-                    for (Player p : otherPlayers) {
-                        if (!equals(p)) {
-                            p.updateCash(-this.drawnCard.getValue());
-                            updateCash(this.drawnCard.getValue());
-                        }
-                    }
-                } else {
-                    System.out.println("Choose a player");
-                    for (Player p : otherPlayers) {
-                        i++;
-                        if (!equals(p))
-                            System.out.printf("[%d] - Player %d\n", i, i);
-                        else
-                            currPlayerIndex = i;
-                    }
-
-                    do {
-                        System.out.print("Enter : ");
-                        playerChosen = Integer.parseInt(scanner.nextLine());
-                    } while (playerChosen == currPlayerIndex || playerChosen < 1 && playerChosen > i);
-
-                    Player p = otherPlayers[playerChosen - 1];
-                    p.updateCash(-this.drawnCard.getValue());
-                    updateCash(this.drawnCard.getValue());
-
-                }
-                break;
-            case 4: // -
-                if (this.drawnCard.getToAll()) {
-                    for (Player p : otherPlayers) {
-                        if (!equals(p)) {
-                            p.updateCash(-this.drawnCard.getValue());
-                            updateCash(this.drawnCard.getValue());
-                        }
-                    }
-                } else {
-                    System.out.println("Choose a player");
-
-                    for (Player p : otherPlayers) {
-                        i++;
-                        if (!equals(p))
-                            System.out.printf("[%d] - Player %d\n", i, i);
-                        else
-                            currPlayerIndex = i;
-                    }
-
-                    do {
-                        System.out.print("Enter : ");
-                        playerChosen = Integer.parseInt(scanner.nextLine());
-                    } while (playerChosen == currPlayerIndex || playerChosen < 1 && playerChosen > i);
-
-                    Player p = otherPlayers[playerChosen - 1];
-                    p.updateCash(this.drawnCard.getValue());
-                    updateCash(-this.drawnCard.getValue());
-
-                }
-                break;
-
-        }
     }
 
     /**

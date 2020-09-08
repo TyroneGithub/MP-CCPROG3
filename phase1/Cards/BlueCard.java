@@ -2,7 +2,7 @@ package phase1.Cards;
 
 import phase1.Player;
 
-public class BlueCard extends Card {
+public abstract class BlueCard extends Card {
 
     private String description;
     private String career;
@@ -35,5 +35,7 @@ public class BlueCard extends Card {
         // for(String c : otherPlayers.getCareer())
         // return this.career(equals)
     }
+
+    public abstract void activate(Player p, Player[] otherPlayers);
 
 }

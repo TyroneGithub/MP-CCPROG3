@@ -20,4 +20,6 @@ public abstract class Card {
         return this.description;
     }
 
+    // public abstract void activate();
+
 }
