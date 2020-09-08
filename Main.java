@@ -35,7 +35,7 @@ public class Main {
             game.move(currPlayer);
 
             System.out.println("Choose an action: ");
-            System.out.println("[1] - Draw");
+            System.out.println("[1] - Show State");
             System.out.println("[2] - End");
             System.out.print("Enter : ");
             action = Integer.parseInt(scanner.nextLine());
@@ -45,8 +45,6 @@ public class Main {
             }
 
             if (action == 1) {
-                game.landedOn(game.getSpace(currPlayer.getSpaceTracker()), currPlayer);
-
                 // display state
                 game.displayState();
 

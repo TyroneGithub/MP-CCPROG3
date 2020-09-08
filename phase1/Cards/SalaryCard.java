@@ -20,8 +20,8 @@ public class SalaryCard extends Card {
         return this.tax;
     }
 
-    public void raiseSalary(double raise) {
-        this.salary += raise;
+    public void raiseSalary() {
+        this.salary += this.raiseValue;
         raiseTax();
     }
 

@@ -97,7 +97,7 @@ public class Deck {
     }
 
     private void generateCareerDeck() {
-        
+
         this.cards.add(new CareerCard("Lawyer", 5, true));// pay raise [5, 8]
         this.cards.add(new CareerCard("Accountant", 5, true));// pay raise [4, 7]
         this.cards.add(new CareerCard("Computer Consultant", 5, true));// pay raise [3, 7]
@@ -158,6 +158,10 @@ public class Deck {
         return text;
     }
 
+    public ArrayList<Card> getCards() {
+        return cards;
+    }
+
     /**
      * draws a card from the deck which also decrements the current number of cards
      * 
@@ -171,6 +175,11 @@ public class Deck {
         Card a = this.cards.get(this.numCards - 1);
         this.numCards--;
         return a;
+    }
+
+    public void addCardBack(Card a) {
+        cards.add(a);
+        this.numCards++;
     }
 
     /*

@@ -3,6 +3,8 @@ package phase1;
 import java.util.*;
 import phase1.Spaces.*;
 
+import phase1.Spaces.MagentaSpace;
+
 /**
  * Creates a game that initalizes all decks and adds players to the game.
  * 
@@ -12,6 +14,9 @@ public class Game {
     private Player[] players;
     private int NUM_PLAYERS;
     private Deck actionDeck;
+    private Deck salaryDeck;
+    private Deck careerDeck;
+    private Deck blueDeck;
     private Space spaces[];
 
     /**
@@ -32,13 +37,18 @@ public class Game {
         }
 
         this.actionDeck = new Deck("Action", 50);
+        this.salaryDeck = new Deck("Salary", 7);
+        this.careerDeck = new Deck("Career", 7);
+        this.careerDeck = new Deck("Blue", 7);
         actionDeck.shuffleDeck();
+        careerDeck.shuffleDeck();
+        salaryDeck.shuffleDeck();
         this.spaces = new Space[100];
         generateSpaces();
     }
 
     public void generateSpaces() {
-        this.spaces[0] = new OrangeSpace("main", this.NUM_PLAYERS);
+        this.spaces[0] = new WhichPathSpace("main", this.NUM_PLAYERS);
         for (int j = 0; j < NUM_PLAYERS; j++)
             this.spaces[0].getPlayers().add(players[j]);
 
@@ -48,7 +58,7 @@ public class Game {
         this.spaces[3] = new OrangeSpace("career", this.NUM_PLAYERS);
         this.spaces[4] = new OrangeSpace("career", this.NUM_PLAYERS);
         this.spaces[5] = new OrangeSpace("career", this.NUM_PLAYERS);
-        this.spaces[6] = new MagentaSpace("career", this.NUM_PLAYERS, "Get Married");
+        this.spaces[6] = new GetMarriedSpace("career", this.NUM_PLAYERS);
         this.spaces[7] = new OrangeSpace("career", this.NUM_PLAYERS);
         this.spaces[8] = new OrangeSpace("career", this.NUM_PLAYERS);
         this.spaces[9] = new OrangeSpace("career", this.NUM_PLAYERS);
@@ -63,9 +73,9 @@ public class Game {
         this.spaces[15] = new OrangeSpace("college", this.NUM_PLAYERS);
         this.spaces[16] = new OrangeSpace("college", this.NUM_PLAYERS);
         this.spaces[17] = new OrangeSpace("college", this.NUM_PLAYERS);
-        this.spaces[18] = new MagentaSpace("college", this.NUM_PLAYERS, "Graduation");
+        this.spaces[18] = new CollegeCareerChoiceSpace("college", this.NUM_PLAYERS); // Palitan to Graduation Space
         this.spaces[19] = new OrangeSpace("college", this.NUM_PLAYERS);
-        this.spaces[20] = new MagentaSpace("college", this.NUM_PLAYERS, "College Career Choice");
+        this.spaces[20] = new CollegeCareerChoiceSpace("college", this.NUM_PLAYERS);
         this.spaces[21] = new OrangeSpace("college", this.NUM_PLAYERS);
 
         // Meet at Some Point
@@ -75,14 +85,14 @@ public class Game {
         }
 
         // Junction
-        this.spaces[38] = new MagentaSpace("main", this.NUM_PLAYERS, "Which path?");
+        this.spaces[38] = new WhichPathSpace("main", this.NUM_PLAYERS);
 
         // Change Career Path
-        this.spaces[39] = new GreenSpace("change career", this.NUM_PLAYERS, "Pay Day");
-        this.spaces[40] = new MagentaSpace("change career", this.NUM_PLAYERS, "Career Choice");
+        this.spaces[39] = new PayDaySpace("change career", this.NUM_PLAYERS);
+        this.spaces[40] = new CollegeCareerChoiceSpace("change career", this.NUM_PLAYERS); // palitan to CareerChoice
         this.spaces[41] = new OrangeSpace("change career", this.NUM_PLAYERS);
-        this.spaces[42] = new MagentaSpace("change career", this.NUM_PLAYERS, "");
-        this.spaces[43] = new GreenSpace("change career", this.NUM_PLAYERS, "Pay Raise");
+        this.spaces[42] = new BlueSpace("change career", this.NUM_PLAYERS);
+        this.spaces[43] = new PayRaiseSpace("change career", this.NUM_PLAYERS);
         this.spaces[44] = new OrangeSpace("change career", this.NUM_PLAYERS);
         this.spaces[45] = new BlueSpace("change career", this.NUM_PLAYERS);
         this.spaces[46] = new OrangeSpace("change career", this.NUM_PLAYERS);
@@ -102,19 +112,19 @@ public class Game {
             this.spaces[i] = new OrangeSpace("main", this.NUM_PLAYERS); // implement a randomizer
         }
 
-        this.spaces[70] = new MagentaSpace("main", this.NUM_PLAYERS, "Which path?");
+        this.spaces[70] = new WhichPathSpace("main", this.NUM_PLAYERS);
 
         // Start a Family Path
         this.spaces[71] = new BlueSpace("family", this.NUM_PLAYERS);
         this.spaces[72] = new OrangeSpace("family", this.NUM_PLAYERS);
-        this.spaces[73] = new GreenSpace("family", this.NUM_PLAYERS, "Pay Day");
-        this.spaces[74] = new MagentaSpace("family", this.NUM_PLAYERS, "Get Married");
+        this.spaces[73] = new PayDaySpace("family", this.NUM_PLAYERS);
+        this.spaces[74] = new GetMarriedSpace("family", this.NUM_PLAYERS);
         this.spaces[75] = new BlueSpace("family", this.NUM_PLAYERS);
-        this.spaces[76] = new MagentaSpace("family", this.NUM_PLAYERS, "Buy A House");
-        this.spaces[77] = new GreenSpace("family", this.NUM_PLAYERS, "Have Baby or Twins");
+        this.spaces[76] = new BuyHouseSpace("family", this.NUM_PLAYERS);
+        this.spaces[77] = new HaveBabySpace("family", this.NUM_PLAYERS);
         this.spaces[78] = new OrangeSpace("family", this.NUM_PLAYERS);
         this.spaces[79] = new OrangeSpace("family", this.NUM_PLAYERS);
-        this.spaces[80] = new MagentaSpace("family", this.NUM_PLAYERS, " ");
+        this.spaces[80] = new PayRaiseSpace("family", this.NUM_PLAYERS);
 
         // Main Path
         this.spaces[81] = new OrangeSpace("main", this.NUM_PLAYERS);
@@ -140,19 +150,47 @@ public class Game {
 
     public void move(Player p) {
         int moveCnt = spinWheel();
+
+        // Special Treatment for Junctions
+        if ((this.spaces[p.getSpaceTracker()] instanceof WhichPathSpace)) {
+            MagentaSpace m = (MagentaSpace) this.spaces[p.getSpaceTracker()];
+            this.spaces[p.getSpaceTracker()].getPlayers().remove(p);
+            m.doMagentaAction(p, this.players, getDecks(this.spaces[p.getSpaceTracker()]));
+            this.spaces[p.getSpaceTracker()].getPlayers().add(p);
+            System.out.println("Test");
+            moveCnt--;
+        } else {
+
+        }
+
         System.out.println("Moving Player " + p.getName() + " to +" + moveCnt + " steps");
         for (; moveCnt > 0; moveCnt--) {
             this.spaces[p.getSpaceTracker()].getPlayers().remove(p); // removes from a player to the current shit
             p.updateSpaceTracker();
-            if (!(this.spaces[p.getSpaceTracker()] instanceof MagentaSpace))
-                moveCnt = 0;
             this.spaces[p.getSpaceTracker()].getPlayers().add(p);
+
+            if ((this.spaces[p.getSpaceTracker()] instanceof MagentaSpace)) {
+                moveCnt = 0; // stop
+                System.out.println("STOP");
+            } else {
+                switch (p.getSpaceTracker()) {
+                    case 11:
+                        p.teleportToSpace(22);
+                        break;
+                    case 47:
+                        p.teleportToSpace(54);
+                        break;
+                    case 80:
+                        p.teleportToSpace(90);
+                        break;
+                }
+            }
+
+        }
+        if (!(this.spaces[p.getSpaceTracker()] instanceof MagentaSpace)) {
+            this.spaces[p.getSpaceTracker()].doAction(p, this.players, getDecks(this.spaces[p.getSpaceTracker()]));
         }
 
-    }
-
-    public void landedOn(Space s, Player p) {
-        s.doAction(p, this.players, getDecks(s));
     }
 
     public ArrayList<Deck> getDecks(Space s) {
@@ -161,10 +199,10 @@ public class Game {
         if (s instanceof OrangeSpace) {
             decks.add(this.actionDeck);
         } else if (s instanceof MagentaSpace) {
-            // decks.add(this.salaryDeck);
-            // decks.add(this.careerDeck);
+            decks.add(this.careerDeck);
+            decks.add(this.salaryDeck);
         } else if (s instanceof BlueSpace) {
-            // decks.add(this.blueDeck);
+            decks.add(this.blueDeck);
         } else {
             // Green
         }

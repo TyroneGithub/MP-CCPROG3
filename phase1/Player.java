@@ -13,12 +13,13 @@ import phase1.Cards.*;
 public class Player {
     private String name;
     private double cash;
-    private SalaryCard salary;
     private ActionCard drawnCard;
     private boolean isRetired;
     private CareerCard career;
     private SalaryCard salaryCard;
     private int spaceTracker;
+    private boolean isMarried;
+    private int numKids;
 
     Scanner scanner = new Scanner(System.in);
 
@@ -38,7 +39,23 @@ public class Player {
         this.career = career;
         this.cash = 20000;
         this.spaceTracker = 0;
+        this.numKids = 0;
+    }
 
+    public void addKids(int num) {
+        this.numKids += num;
+    }
+
+    public int getNumKids() {
+        return numKids;
+    }
+
+    public void setMarried(boolean isMarried) {
+        this.isMarried = isMarried;
+    }
+
+    public boolean isMarried() {
+        return isMarried;
     }
 
     /**
@@ -66,6 +83,14 @@ public class Player {
      */
     public String getCareer() {
         return this.career.getCareerName();
+    }
+
+    public CareerCard getCareerCard() {
+        return this.career;
+    }
+
+    public void setCareer(CareerCard career) {
+        this.career = career;
     }
 
     public SalaryCard getSalaryCard() {
@@ -107,8 +132,21 @@ public class Player {
         this.cash += cash;
     }
 
+    public void updateCareer(CareerCard career) {
+        this.career = career;
+
+    }
+
+    public void updateSalary(SalaryCard salary) {
+        this.salaryCard = salary;
+    }
+
     public void updateSpaceTracker() {
         this.spaceTracker++;
+    }
+
+    public void teleportToSpace(int space) {
+        this.spaceTracker = space;
     }
 
     /**

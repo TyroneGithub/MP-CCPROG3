@@ -3,6 +3,7 @@ package phase1.Spaces;
 import phase1.Player;
 import phase1.Deck;
 import java.util.ArrayList;
+import phase1.Cards.BlueCard;
 
 public class BlueSpace extends Space {
     private String deckType;
@@ -17,7 +18,10 @@ public class BlueSpace extends Space {
     }
 
     public void doAction(Player p, Player[] others, ArrayList<Deck> blueDeck) {
-        System.out.println("B");
+
+        BlueCard c = (BlueCard) blueDeck.get(0).drawCard();
+
+        c.activate(p, others);
     }
 
 }
