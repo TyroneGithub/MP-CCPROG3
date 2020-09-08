@@ -1,4 +1,4 @@
-package phase1;
+package phase1.Cards;
 
 public class CollectFromPlayer extends ActionCard {
 

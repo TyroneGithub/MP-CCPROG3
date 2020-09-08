@@ -1,4 +1,8 @@
-package phase1;
+package phase1.Spaces;
+
+import phase1.Player;
+import phase1.Deck;
+import java.util.ArrayList;
 
 public class OrangeSpace extends Space {
     private String deckType;
@@ -10,6 +14,10 @@ public class OrangeSpace extends Space {
 
     public String getDeckType() {
         return deckType;
+    }
+
+    public void doAction(Player p, Player[] others, ArrayList<Deck> actionDeck) {
+        System.out.println("O");
     }
 
 }

@@ -1,4 +1,4 @@
-package phase1;
+package phase1.Cards;
 
 /**
  * implements a Career Card that has the name of the career, the maximum pay
@@ -7,7 +7,7 @@ package phase1;
  * 
  */
 
-public class CareerCard extends Card{
+public class CareerCard extends Card {
     private String careerName;
     private final int MAX_PAY_RAISE;
     private boolean degreeRequired;

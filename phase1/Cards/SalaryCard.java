@@ -1,31 +1,30 @@
-package phase1;
+package phase1.Cards;
 
-public class SalaryCard extends Card{
+public class SalaryCard extends Card {
     private double salary;
     private double tax;
 
-    public SalaryCard(double salary, double tax){
+    public SalaryCard(double salary, double tax) {
         super("Salary Card");
         this.salary = salary;
-        this.tax =tax;
+        this.tax = tax;
     }
 
-    public double getSalary(){
+    public double getSalary() {
         return this.salary;
     }
 
-    public double getTax(){
+    public double getTax() {
         return this.tax;
     }
 
-    public void raiseSalary(double raise){
+    public void raiseSalary(double raise) {
         this.salary += raise;
         raiseTax();
     }
 
-    private void raiseTax(){
+    private void raiseTax() {
         this.tax += 2000;
     }
-
 
 }

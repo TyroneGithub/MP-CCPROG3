@@ -1,4 +1,4 @@
-package phase1;
+package phase1.Cards;
 
 /**
  * implements an Action Card that has a description a cash value and a type. It

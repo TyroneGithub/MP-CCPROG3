@@ -1,4 +1,8 @@
-package phase1;
+package phase1.Spaces;
+
+import phase1.Deck;
+import phase1.Player;
+import java.util.ArrayList;
 
 public class MagentaSpace extends Space {
     private String deckType;
@@ -21,6 +25,10 @@ public class MagentaSpace extends Space {
         this.getPlayers().get(this.getPlayers().size() - 1).drawCard(careerDeck);
         this.getPlayers().get(this.getPlayers().size() - 1).drawCard(salaryDeck);
 
+    }
+
+    public void doAction(Player p, Player[] others, ArrayList<Deck> decks) {
+        System.out.println("M");
     }
 
 }

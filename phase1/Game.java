@@ -1,6 +1,7 @@
 package phase1;
 
 import java.util.*;
+import phase1.Spaces.*;
 
 /**
  * Creates a game that initalizes all decks and adds players to the game.
@@ -146,8 +147,30 @@ public class Game {
             if (!(this.spaces[p.getSpaceTracker()] instanceof MagentaSpace))
                 moveCnt = 0;
             this.spaces[p.getSpaceTracker()].getPlayers().add(p);
-
         }
+
+    }
+
+    public void landedOn(Space s, Player p) {
+        s.doAction(p, this.players, getDecks(s));
+    }
+
+    public ArrayList<Deck> getDecks(Space s) {
+        ArrayList<Deck> decks = new ArrayList<>();
+
+        if (s instanceof OrangeSpace) {
+            decks.add(this.actionDeck);
+        } else if (s instanceof MagentaSpace) {
+            // decks.add(this.salaryDeck);
+            // decks.add(this.careerDeck);
+        } else if (s instanceof BlueSpace) {
+            // decks.add(this.blueDeck);
+        } else {
+            // Green
+        }
+
+        return decks;
+
     }
 
     /**
@@ -231,7 +254,7 @@ public class Game {
         System.out.println();
         for (int i = 0; i < 100; i++) {
             if (this.spaces[i].getPlayers().size() != 0) {
-                System.out.println(this.spaces[i].identifySpace() + " Space " + (i + 1) + " Players: ");
+                System.out.println(" Space " + (i + 1) + " Players: ");
                 for (int j = 0; j < this.spaces[i].getPlayers().size(); j++)
                     System.out.println(this.spaces[i].getPlayers().get(j).getName());
 
