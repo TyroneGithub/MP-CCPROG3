@@ -33,9 +33,9 @@ public class Main {
 
             System.out.println("It's Player " + (playerIndex + 1) + " (" + currPlayer.getName() + "'s) turn: ");
             game.move(currPlayer);
-
+            game.displayState();
             System.out.println("Choose an action: ");
-            System.out.println("[1] - Show State");
+            System.out.println("[1] - Next");
             System.out.println("[2] - End");
             System.out.print("Enter : ");
             action = Integer.parseInt(scanner.nextLine());
@@ -46,7 +46,6 @@ public class Main {
 
             if (action == 1) {
                 // display state
-                game.displayState();
 
             } else {
                 game.retireAll();
